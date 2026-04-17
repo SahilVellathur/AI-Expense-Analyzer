@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00623d;
+  --color-primary-container: #007e4f;
+  --color-secondary: #78fbb6;
+  --color-surface: #f8faf8;
+  --color-on-surface: #191c1b;
+  --color-on-surface-variant: #40493d;
+  --color-mint-50: #f0fdf4;
+  --color-mint-100: #dcfce7;
+  --color-mint-200: #bbf7d0;
+  --color-mint-300: #86efac;
+  --color-mint-400: #4ade80;
+  --color-mint-500: #22c55e;
+  --color-mint-600: #16a34a;
+  --color-mint-700: #15803d;
+  --color-mint-800: #166534;
+  --color-mint-900: #14532d;
+  --color-mint: #22c55e;
+  --color-emerald-50: #ecfdf5;
+  
+  --font-display: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  
+  --shadow-botanical: 0 10px 40px -10px rgba(0, 98, 61, 0.12), 0 0 10px -5px rgba(0, 0, 0, 0.05);
+  
+  --animation-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body antialiased selection:bg-primary/20 selection:text-primary;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-on-surface tracking-tight;
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-2xl border border-white/40 shadow-sm shadow-black/5;
+  }
+
+  .card-botanical {
+    @apply bg-white rounded-3xl p-6 border border-mint-100 transition-all duration-500 overflow-hidden;
+    box-shadow: var(--shadow-botanical);
+    &:hover {
+      @apply shadow-2xl -translate-y-1 border-primary/10;
+    }
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-primary/20;
+    &:hover {
+      @apply shadow-xl shadow-primary/30 -translate-y-0.5 brightness-110;
+    }
+    &:active {
+      @apply scale-95 brightness-95;
+    }
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all duration-300 text-on-surface-variant font-medium;
+    &:hover {
+      @apply bg-mint-50/50 text-primary translate-x-1;
+    }
+    &.active {
+      @apply bg-primary text-white font-bold shadow-lg shadow-primary/20;
+      & .lucide {
+        @apply scale-110;
+      }
+    }
+  }
+
+  /* Page Transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms var(--animation-soft), transform 500ms var(--animation-soft);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-mint-200/50 rounded-full;
+  &:hover {
+    @apply bg-mint-300/50;
+  }
+}
