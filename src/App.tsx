@@ -16,7 +16,7 @@ import SettingsPage from './pages/Settings'
 import Login from './pages/Login'
 import Sidebar from './components/Sidebar'
 import Layout from './components/Layout'
-import { initialTransactions, Transaction, aiInsights, savingsData } from './data'
+import { initialTransactions, Transaction, aiInsights } from './data'
 
 export interface Tab {
   id: string;
@@ -53,7 +53,6 @@ function App() {
   // Data to show
   const displayTransactions = transactions
   const displayInsights = aiInsights
-  const displaySavingsData = savingsData
 
   // User profile state with per-user persistence
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
@@ -210,12 +209,12 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard': return <Dashboard transactions={displayTransactions} savingsData={displaySavingsData} userProfile={userProfile} />
+      case 'dashboard': return <Dashboard transactions={displayTransactions} userProfile={userProfile} />
       case 'add': return <AddExpense onAddTransaction={addTransaction} />
       case 'reports': return <Reports transactions={displayTransactions} onDeleteTransaction={deleteTransaction} />
       case 'insights': return <Insights transactions={displayTransactions} insights={displayInsights} />
       case 'settings': return <SettingsPage userProfile={userProfile} onUpdateProfile={setUserProfile} onLogout={handleLogout} />
-      default: return <Dashboard transactions={displayTransactions} savingsData={displaySavingsData} userProfile={userProfile} />
+      default: return <Dashboard transactions={displayTransactions} userProfile={userProfile} />
     }
   }
 

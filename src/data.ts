@@ -41,7 +41,12 @@ export const initialTransactions: Transaction[] = [];
 
 export const aiInsights: AIInsight[] = [];
 
-export const savingsData: SavingTrend[] = [];
+export const savingsData: SavingTrend[] = [
+  { month: 'Jan', saved: 10000, target: 12000 },
+  { month: 'Feb', saved: 15000, target: 12000 },
+  { month: 'Mar', saved: 18000, target: 12000 },
+  { month: 'Apr', saved: 20000, target: 12000 },
+];
 
 // Showcase / Demo Data (Botanical Theme)
 export const demoTransactions: Transaction[] = [

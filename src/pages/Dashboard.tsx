@@ -18,13 +18,13 @@ import {
   Pie,
   Cell
 } from 'recharts'
-import { categories, Transaction, Category, SavingTrend } from '../data'
+import { categories, Transaction, Category } from '../data'
+import { useSavingsData } from '../hooks/useSavingsData'
 import { formatINR } from '../utils/format'
 import { UserProfile } from '../App'
 
 interface DashboardProps {
   transactions: Transaction[];
-  savingsData: SavingTrend[];
   userProfile: UserProfile;
 }
 
@@ -36,7 +36,8 @@ interface StatCardProps {
   color: string;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ transactions, savingsData, userProfile }) => {
+const Dashboard: React.FC<DashboardProps> = ({ transactions, userProfile }) => {
+  const { data: savingsData } = useSavingsData()
   const totalExpenses = transactions.reduce((acc: number, curr: Transaction) => acc + curr.amount, 0)
   const monthlyBudget = userProfile.monthlyBudget
   const savings = Math.max(0, monthlyBudget - totalExpenses)
@@ -173,12 +174,12 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, savingsData, userPr
                 <div className="w-3 h-3 rounded-full bg-primary" /> Saved
               </span>
               <span className="flex items-center gap-1 text-xs text-on-surface-variant">
-                <div className="w-3 h-3 rounded-full bg-mint-100" /> Target
+                <div className="w-3 h-3 rounded-full bg-emerald-100" /> Target
               </span>
             </div>
           </div>
           <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="99%" height="100%">
               <AreaChart data={savingsData}>
                 <defs>
                   <linearGradient id="colorSaved" x1="0" y1="0" x2="0" y2="1">
@@ -228,7 +229,7 @@ const Dashboard: React.FC<DashboardProps> = ({ transactions, savingsData, userPr
         <div className="card-botanical">
           <h3 className="text-lg font-bold mb-8">Spending by Category</h3>
           <div className="h-[250px] w-full relative">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="99%" height="100%">
               <PieChart>
                 <Pie
                   data={categoryData}

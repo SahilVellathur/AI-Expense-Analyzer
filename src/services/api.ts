@@ -1,4 +1,15 @@
-// src/apiConfig.ts
+import { savingsData, SavingTrend } from '../data';
+
+export type { SavingTrend };
+
+export const fetchSavingsData = async (): Promise<SavingTrend[]> => {
+  // Simulate an API delay
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(savingsData);
+    }, 500);
+  });
+};
 
 /**
  * Central configuration for API endpoints.
